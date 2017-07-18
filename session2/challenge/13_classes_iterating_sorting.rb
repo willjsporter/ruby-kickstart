@@ -29,6 +29,7 @@
 # blog1 = lissa.blogs.first
 # blog1.user                      # => lissa
 #
+
 # Blog.new Date.parse("2007-01-02"), lissa, "Going dancing!"                                    # we'll call this blog2
 # Blog.new Date.parse("2006-01-02"), lissa, "For the last time, fuck facebook >.<"              # we'll call this blog3
 # Blog.new Date.parse("2010-01-02"), lissa, "Got a new job, cuz I'm pretty much the best ^_^"   # we'll call this blog4
@@ -64,3 +65,46 @@
 # date docs are at: http://ruby-doc.org/core/classes/Date.html
 # don't spend too much time worrying about them :)
 require 'date'
+
+class User
+  attr_accessor :username, :blogs
+
+  def initialize(username)
+    self.username = username
+    self.blogs=[]
+  end
+
+  def add_blog(date,text)
+    asdf=Blog.new(date,self,text)
+    blogs<<asdf
+    self.blogs.sort_by!{|blog| blog.date}.reverse
+  end
+end
+
+class Blog
+  attr_accessor :text , :date , :user
+
+  def initialize(date,user,text)
+    self.date = date
+    self.user = user
+    self.text = text
+  end
+
+  def summary
+    text.split(' ').slice(0,10).join(" ")
+  end
+
+  def entry
+    "#{user.username} #{date}\n#{text}"
+  end
+
+  def ==(other)
+  self.date == other.date && self.user == other.user && self.text == other.text
+  end
+
+
+end
+
+will=User.new "Will Porter"
+will.add_blog(Date.new(2017-01-31), "Hello my name is Will and I'm finding all this shit fucking harrrrd!")
+puts will.blogs

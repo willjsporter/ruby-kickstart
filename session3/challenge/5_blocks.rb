@@ -16,3 +16,23 @@
 #   order << i
 # end
 # order # => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+
+def spiral_access(ary,counter=0,&block)
+x=ary.first.length-1
+y=ary.length-1
+
+return if x/2<counter || y/2<counter
+
+counter.upto(x-counter){|a| block.call(ary[counter][a])}
+
+(counter+1).upto(y-counter){|a| block.call(ary[a][x-counter])}
+
+(x-counter-1).downto(counter){|a| block.call(ary[y-counter][a])}
+
+(y-counter-1).downto(counter+1){|a| block.call(ary[a][counter])}
+
+spiral_access(ary,counter+1,&block)
+
+end
+
+#passed

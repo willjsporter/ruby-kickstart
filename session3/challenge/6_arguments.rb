@@ -17,3 +17,11 @@
 # match_maker true,  true,  true, true, nil     # => [false, true]
 # match_maker true,  true,  true, 0, nil        # => [false, true]
 
+def match_maker(trufal,*options)
+  retarr=[]
+  options.each_slice(2) do |a,b|
+    a=!!a;b=!!b
+      retarr.push retarr ? (a!=b): a==b
+  end
+  retarr
+end

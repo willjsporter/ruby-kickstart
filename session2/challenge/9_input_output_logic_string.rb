@@ -24,12 +24,17 @@
 # USER:     BYE
 
 def deaf_grandma
+user_text=gets.chomp
+  while user_text != "BYE"
+    break if user_text=="BYE"
+    if user_text==user_text.upcase && user_text!=''
+      puts "NO, NOT SINCE 1938!"
+    else puts "HUH?! SPEAK UP, SONNY!"
+    end
+    user_text=gets.chomp
+  end
 
 end
-
-
-
-
 
 # This will call your code so you can run it from the terminal.
 # But not call it otherwise, so that it will work with our tests.
