@@ -29,6 +29,7 @@
 #   end
 # end
 
-
-def array_init
+def array_init(x=5,&block)
+  block ||= Proc.new{|index| index*100}
+  Array.new(x,block)
 end
